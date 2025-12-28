@@ -151,8 +151,9 @@ body {
 }
 
 .about-content {
-    display: grid;
-    gap: 2rem;
+flex;
+      flex-direction: column;g
+      gap: 2rem;
 }
 
 /* Profile image display - appears above Professional Mission */
