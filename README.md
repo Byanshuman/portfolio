@@ -168,7 +168,7 @@ Feel free to fork this project and customize it for your portfolio. If you have 
 **Byanshuman**
 - LinkedIn: [@byanshuman](https://www.linkedin.com/in/byanshuman/)
 - GitHub: [@Byanshuman](https://github.com/Byanshuman/)
-- Email: your.email@example.com
+- Email: bytheanshuman@gmail.com
 
 ## 🙏 Acknowledgments
 
