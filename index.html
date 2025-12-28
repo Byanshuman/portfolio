@@ -2,217 +2,430 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HR Professional Portfolio - ANSHUMAN YADAV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anshuman Yadav | HR Portfolio</title>
+  <!-- Inline CSS (fonts loaded via @import) -->
+  <style>
+    /* Modern fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-  <!-- Main Theme -->
-  <link rel="stylesheet" href="theme.css?v=3">
+    /* Root theme tokens */
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-2: #9333ea;
+      --hero-1: #0ea5e9;
+      --hero-2: #10b981;
+      --shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+      --radius: 14px;
+      --focus: 0 0 0 3px rgba(37, 99, 235, 0.35);
+    }
+    body.dark {
+      --bg: #0b1220;
+      --text: #e5e7eb;
+      --muted: #a3a3a3;
+      --card: #0f172a;
+      --border: #1f2937;
+      --accent: #60a5fa;
+      --accent-2: #c084fc;
+      --hero-1: #2563eb;
+      --hero-2: #22c55e;
+      --shadow: 0 10px 28px rgba(0,0,0,0.45);
+      --focus: 0 0 0 3px rgba(96, 165, 250, 0.45);
+    }
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* Base */
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: 92%; max-width: 1100px; margin: 0 auto; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
-  <!-- Meta for SEO -->
-  <meta name="description" content="Portfolio of Anshuman Yadav, HR Professional specializing in Psychology, HRM, and Organizational Behavior.">
-</head>
+    /* Header / Nav */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      backdrop-filter: saturate(180%) blur(8px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 0;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 600;
+    }
+    .brand .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--hero-1), var(--hero-2));
+      box-shadow: var(--shadow);
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--text); font-weight: 500; padding: 8px 10px; border-radius: 8px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: color-mix(in oklab, var(--accent) 12%, transparent); color: var(--accent); }
+    .theme-toggle {
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 8px 12px; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: var(--shadow);
+    }
+    .theme-toggle:focus-visible { outline: none; box-shadow: var(--focus); }
 
-<body>
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-1), var(--hero-2));
+      color: #ffffff; border-bottom-left-radius: 36px; border-bottom-right-radius: 36px;
+      box-shadow: var(--shadow);
+    }
+    .hero-inner { padding: 72px 0; text-align: center; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 10px; }
+    .hero p { font-size: clamp(1rem, 2.2vw, 1.2rem); opacity: 0.95; margin: 0 0 22px; }
+    .cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 18px; border-radius: 12px; border: none; cursor: pointer;
+      background: #ffffff; color: #0b1220; font-weight: 600; box-shadow: var(--shadow);
+    }
+    .cta:hover { transform: translateY(-1px); }
+    .cta:focus-visible { outline: none; box-shadow: var(--focus); }
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">ANSHUMAN YADAV</div>
+    /* Section */
+    section { padding: 64px 0; }
+    section h2 { font-size: clamp(1.6rem, 3vw, 2rem); margin: 0 0 18px; }
+    section .sub { color: var(--muted); margin-bottom: 24px; }
 
-      <!-- 🌗 Theme Toggle Button -->
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    /* About two-column */
+    .about-wrap {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start;
+    }
+    .profile-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px; box-shadow: var(--shadow);
+    }
+    .profile-img {
+      border-radius: var(--radius);
+      aspect-ratio: 1/1;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, transparent), color-mix(in oklab, var(--accent-2) 20%, transparent));
+      display: grid; place-items: center; color: #fff; font-weight: 600;
+    }
 
-      <ul class="nav-menu">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#certifications" class="nav-link">Certifications</a></li>
-        <li><a href="#blog" class="nav-link">Blog</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    /* Experience timeline */
+    .timeline { position: relative; margin-left: 8px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 10px; top: 0; bottom: 0;
+      width: 3px; background: color-mix(in oklab, var(--accent) 35%, var(--border));
+      border-radius: 2px;
+    }
+    .t-item { position: relative; padding-left: 36px; margin-bottom: 22px; }
+    .t-item::before {
+      content: ""; position: absolute; left: 4px; top: 6px; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 8px; }
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1>Hi, I'm ANSHUMAN YADAV</h1>
-      <p>M.A. Psychology (Silver Medalist) | MBA HR&OB | HR Professional</p>
-      <p class="subtitle">
-        Passionate about People, Performance, and Potential | Researcher |
-        Human Behaviour, Work & Policy | Future Think Tank Architect
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-      </div>
-    </div>
-  </section>
+    /* Projects grid */
+    .grid {
+      display: grid; gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .project a.btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px; color: var(--text);
+      background: var(--card);
+    }
+    .project a.btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <div class="about-content">
-        <div class="mission-statement">
-          <h3>Professional Mission</h3>
-          <p>
-            I'm Anshuman Yadav — a postgraduate in Psychology. My academic journey has been driven by a
-            deep curiosity about how people think, feel, work, and grow — both individually and within systems.
-          </p>
-          <p>
-            I'm especially passionate about emotional intelligence at work, learning and development,
-            workplace wellbeing, and the behavioral science behind leadership and motivation.
-          </p>
-        </div>
-        <p>
-          With an M.A. in Psychology (Silver Medalist) and ongoing MBA in HR&OB from Delhi University,
-          I bring a unique blend of psychological expertise and HR knowledge.
-        </p>
-        <div class="cv-download">
-          <a href="resume.pdf" class="btn btn-resume" target="_blank">
-            Download My Resume (PDF)
-          </a>
-        </div>
-        <div class="about-info">
-          <div class="info-item">
-            <h4>Education</h4>
-            <p>M.A. Psychology (Silver Medalist) | MBA HR&OB (Delhi University)</p>
-          </div>
-          <div class="info-item">
-            <h4>Location</h4>
-            <p>Prayagraj, Uttar Pradesh, India</p>
-          </div>
-          <div class="info-item">
-            <h4>Open To</h4>
-            <p>
-              HR Operations | HR Generalist | Talent Acquisition |
-              HRIS/HRMS | Employee Engagement & Administration
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    /* Skills grid */
+    .skills-grid {
+      display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    .skill {
+      display: grid; place-items: center; text-align: center; gap: 8px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+    }
+    .skill i { font-size: 1.4rem; color: var(--accent); }
 
-  <!-- Experience Section -->
-  <section id="experience" class="experience">
-    <div class="container">
-      <h2>Experience</h2>
-      <div class="experience-grid">
-        <div class="experience-card">
-          <h3>Research Assistant</h3>
-          <p><strong>Organization:</strong> J.S. Institute of Education</p>
-          <p><strong>Duration:</strong> Jul 2024 – Dec 2024</p>
-          <p><strong>Responsibilities:</strong> Research, SPSS, reporting, academic support</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    /* Contact */
+    .form {
+      display: grid; gap: 12px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+    }
+    .form input, .form textarea {
+      border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text);
+      padding: 10px 12px; font: inherit;
+    }
+    .form input:focus, .form textarea:focus { outline: none; box-shadow: var(--focus); border-color: var(--accent); }
+    .submit {
+      background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 12px 14px; font-weight: 600; cursor: pointer;
+    }
+    .submit:hover { filter: brightness(1.05); }
+    .contact-social {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 12px;
+    }
+    .social {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+      padding: 8px 12px; border-radius: 10px; box-shadow: var(--shadow);
+    }
+    .social:hover { border-color: var(--accent); color: var(--accent); }
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>HRM System – Python</h3>
-          <p>Flask based HRM System with payroll & attendance.</p>
-        </div>
-        <div class="project-card">
-          <h3>Professional Portfolio Website</h3>
-          <p>Fully responsive HR portfolio website.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 22px 0; text-align: center; color: var(--muted);
+    }
 
-  <!-- Skills Section -->
-  <section id="skills" class="skills">
-    <div class="container">
-      <h2>Skills & Expertise</h2>
-      <ul class="skills-list">
-        <li><i class="fa-solid fa-users"></i> HR Operations</li>
-        <li><i class="fa-solid fa-clipboard-check"></i> Talent Acquisition</li>
-        <li><i class="fa-solid fa-chart-line"></i> Employee Engagement</li>
-        <li><i class="fa-solid fa-database"></i> HRIS/HRMS</li>
-        <li><i class="fa-solid fa-brain"></i> Organizational Behavior</li>
-      </ul>
-    </div>
-  </section>
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-wrap { grid-template-columns: 1fr; }
+      .hero-inner { padding: 58px 0; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { gap: 10px; }
+      .brand .avatar { width: 30px; height: 30px; }
+    }
+  </style>
 
-  <!-- Certifications Section -->
-  <section id="certifications" class="certifications">
-    <div class="container">
-      <h2>Certifications</h2>
-      <p>Coming soon...</p>
-    </div>
-  </section>
-
-  <!-- Blog Section -->
-  <section id="blog" class="blog">
-    <div class="container">
-      <h2>Blog</h2>
-      <p>Insights on HR, Psychology, and Workplace Trends.</p>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Get in Touch</h2>
-      <form class="contact-form" id="contactForm">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-        <button type="submit" class="btn btn-primary">Send</button>
-      </form>
-      <p id="formStatus"></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 ANSHUMAN YADAV. All rights reserved.</p>
-  </footer>
-
-  <!-- JS Functions -->
+  <!-- Inline JavaScript -->
   <script>
-    // 🌗 Theme Toggle
-    const themeToggle = document.getElementById("themeToggle");
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-theme");
-      themeToggle.textContent = document.body.classList.contains("dark-theme") ? "☀️" : "🌙";
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    // Persist theme
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') document.body.classList.add('dark');
+    })();
+
+    // Smooth scroll active highlight
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+      function onScroll() {
+        const y = window.scrollY + 100;
+        let current = null;
+        for (const sec of sections) {
+          if (sec.offsetTop <= y) current = sec.id;
+        }
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     });
 
-    // Smooth Scroll
-    document.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute("href")).scrollIntoView({
-          behavior: "smooth"
-        });
-      });
-    });
-
-    // Contact Form Demo
-    const contactForm = document.getElementById("contactForm");
-    const formStatus = document.getElementById("formStatus");
-    contactForm.addEventListener("submit", function(e) {
+    // Demo submission handler
+    function submitForm(e) {
       e.preventDefault();
-      formStatus.textContent = "✅ Thank you! Your message has been sent.";
-      contactForm.reset();
-    });
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if (!name || !email || !msg) return alert('Please fill all fields.');
+      alert('Thank you, ' + name + '! Your message has been received. Anshuman will reach out shortly.');
+      e.target.reset();
+    }
   </script>
 
+  <!-- Icons (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <!-- Header / Navigation -->
+  <header role="banner" aria-label="Primary">
+    <div class="container nav">
+      <div class="brand" aria-label="Brand">
+        <div class="avatar" aria-hidden="true"></div>
+        <div>Anshuman Yadav</div>
+      </div>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" onclick="toggleTheme()">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="hero" class="hero" aria-label="Hero">
+      <div class="container hero-inner">
+        <h1>Hello, I’m Anshuman Yadav</h1>
+        <p>HR Professional • Psychology (Silver Medalist) • MBA (HRM & OB)</p>
+        <button class="cta" type="button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <i class="fa-solid fa-paper-plane"></i>
+          Contact me
+        </button>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container about-wrap">
+        <div>
+          <h2 id="about-title">About me</h2>
+          <p class="sub">Prayagraj, Uttar Pradesh, India • bytheanshuman@gmail.com • 9410070533 • linkedin.com/in/byanshuman</p>
+          <div class="card">
+            <p>
+              Dynamic HR professional with a strong foundation in Psychology (Silver Medalist) and an ongoing MBA in HR & OB.
+              Skilled in HR operations, recruitment, HRIS tools, and employee engagement. Passionate about people, performance, and potential.
+            </p>
+            <ul>
+              <li><strong>Focus:</strong> HR Operations, Talent Acquisition, HR Analytics, Workplace Wellbeing</li>
+              <li><strong>Blend:</strong> Behavioral science + HR technology for efficiency and engagement</li>
+              <li><strong>Strengths:</strong> Communication, research methodology, organizational behavior, public speaking</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="profile-card" aria-label="Profile image">
+          <div class="profile-img" role="img" aria-label="Profile image placeholder with AY initials">
+            AY
+          </div>
+          <div style="margin-top:12px; color: var(--muted);">
+            Prefer a real photo? Replace this card’s background with your profile image.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Experience (Timeline) -->
+    <section id="experience" aria-labelledby="exp-title">
+      <div class="container">
+        <h2 id="exp-title">Experience</h2>
+        <div class="timeline" aria-label="Career timeline">
+          <div class="t-item">
+            <div class="card">
+              <h3>Research Assistant</h3>
+              <p class="sub"><em>J.S. Institute of Education, Shikohabad, Firozabad</em> • Jul 2024 – Dec 2024</p>
+              <ul>
+                <li><strong>Research:</strong> Cognitive processes, learning behavior, emotional development</li>
+                <li><strong>Methods:</strong> Literature reviews, data collection & analysis (quantitative & qualitative)</li>
+                <li><strong>Tools:</strong> SPSS, interview protocols, questionnaire design</li>
+                <li><strong>Impact:</strong> Proposal drafting, reporting, and seminar organization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px" class="card">
+          <h3>Education</h3>
+          <ul>
+            <li><strong>MBA (HRM & OB):</strong> Delhi University (2025–2027)</li>
+            <li><strong>M.A. Psychology (Silver Medalist):</strong> J.S. Institute of Education (2022–2024)</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:14px" class="card">
+          <h3>Certifications</h3>
+          <ul>
+            <li><strong>Diploma:</strong> Administrative Human Resources Management (2025)</li>
+            <li><strong>UNESCO ICT Essentials:</strong> ICT Essentials Course for Teachers (2025)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" aria-labelledby="proj-title">
+      <div class="container">
+        <h2 id="proj-title">Projects</h2>
+        <p class="sub">Selected work across HR technology and analytics</p>
+        <div class="grid">
+          <article class="card project">
+            <h3>HRM-System-Python</h3>
+            <p>
+              Open-source HRMS built with Flask, SQLAlchemy, and JWT authentication. Features include employee management,
+              payroll processing, attendance tracking, leave requests, and department management.
+            </p>
+            <a class="btn" href="#" aria-label="View HRM-System-Python on GitHub">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </article>
+          <!-- Add more project cards as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <h2 id="skills-title">Skills</h2>
+        <p class="sub">Core capabilities and tools</p>
+        <div class="skills-grid" role="list">
+          <div class="skill" role="listitem"><i class="fa-solid fa-user-tie" aria-hidden="true"></i><div><strong>HR Operations:</strong> Processes & policy</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><div><strong>Talent Acquisition:</strong> Sourcing & screening</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-database" aria-hidden="true"></i><div><strong>HRIS Tools:</strong> Workday, SAP SF, BambooHR</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i><div><strong>Payroll:</strong> Attendance & compliance</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-heart" aria-hidden="true"></i><div><strong>Engagement:</strong> Culture & wellbeing</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><div><strong>HR Analytics:</strong> Insights & reporting</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-users" aria-hidden="true"></i><div><strong>Org Behavior:</strong> Leadership & teams</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-flask" aria-hidden="true"></i><div><strong>Research:</strong> SPSS & qualitative methods</div></div>
+          <div class="skill" role="listitem"><i class="fa-solid fa-microphone" aria-hidden="true"></i><div><strong>Public Speaking:</strong> Training & facilitation</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title">Contact</h2>
+        <p class="sub">Let’s collaborate or discuss opportunities</p>
+        <form class="form" onsubmit="submitForm(event)" aria-label="Contact form">
+          <label class="sr-only" for="name">Your name</label>
+          <input id="name" name="name" type="text" placeholder="Your Name" required />
+
+          <label class="sr-only" for="email">Your email</label>
+          <input id="email" name="email" type="email" placeholder="Your Email" required />
+
+          <label class="sr-only" for="message">Your message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+
+          <button class="submit" type="submit"><i class="fa-solid fa-envelope"></i> Send message</button>
+        </form>
+
+        <div class="contact-social" aria-label="Social links">
+          <a class="social" href="mailto:bytheanshuman@gmail.com" aria-label="Email Anshuman">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+          <a class="social" href="tel:9410070533" aria-label="Call Anshuman">
+            <i class="fa-solid fa-phone"></i> Call
+          </a>
+          <a class="social" href="https://www.linkedin.com/in/byanshuman" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn profile">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    © 2025 Anshuman Yadav. All rights reserved.
+  </footer>
 </body>
 </html>
-
