@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-60-90 Day Strategy - Anshuman Yadav</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f7fafc; color: #2d3748; line-height: 1.6; }
+
+        /* Nav */
+        nav { background: #fff; padding: 15px 0; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
+        nav .container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        nav .logo { font-weight: 700; font-size: 1.2rem; color: #5a67d8; text-decoration: none; }
+        nav .back-link { text-decoration: none; color: #666; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        nav .back-link:hover { color: #5a67d8; }
+
+        /* Header */
+        header { text-align: center; padding: 80px 20px 60px; background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); color: white; }
+        header h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        header p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+
+        /* Roadmap Grid */
+        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: -40px; }
+
+        .phase-card {
+            background: #fff; border-radius: 12px; padding: 30px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid #cbd5e0;
+            transition: transform 0.3s;
+        }
+        .phase-card:hover { transform: translateY(-10px); }
+
+        /* Specific Colors for Phases */
+        .phase-30 { border-top-color: #4fd1c5; }
+        .phase-60 { border-top-color: #f6ad55; }
+        .phase-90 { border-top-color: #667eea; }
+
+        .phase-icon { 
+            font-size: 2.5rem; margin-bottom: 20px; display: inline-block; padding: 15px; 
+            border-radius: 50%; background: #f7fafc; 
+        }
+        .phase-30 .phase-icon { color: #38b2ac; background: #e6fffa; }
+        .phase-60 .phase-icon { color: #dd6b20; background: #fffaf0; }
+        .phase-90 .phase-icon { color: #5a67d8; background: #ebf4ff; }
+
+        h2 { font-size: 1.8rem; margin-bottom: 5px; }
+        .subtitle { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; margin-bottom: 20px; display: block; }
+
+        /* Checklist */
+        .checklist { list-style: none; margin-top: 20px; }
+        .checklist li { 
+            margin-bottom: 15px; padding-left: 25px; position: relative; color: #4a5568; font-size: 0.95rem; 
+        }
+        .checklist li::before {
+            content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+            position: absolute; left: 0; top: 0; color: #48bb78;
+        }
+
+        /* Outcome Box */
+        .outcome { 
+            margin-top: 25px; background: #f7fafc; padding: 15px; border-radius: 6px; 
+            font-size: 0.9rem; border-left: 3px solid #cbd5e0;
+        }
+        .outcome strong { display: block; color: #2d3748; margin-bottom: 5px; }
+
+        /* CTA */
+        .cta-section { text-align: center; margin-top: 80px; padding: 40px; background: #fff; border-radius: 12px; }
+        .btn { display: inline-block; background: #5a67d8; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background 0.3s; }
+        .btn:hover { background: #4c51bf; }
+
+        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Anshuman Yadav</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>My First 90 Days</h1>
+        <p>A strategic roadmap for delivering immediate value in HR Operations & Analytics.</p>
+    </header>
+
+    <div class="container">
+        <div class="roadmap-grid">
+            
+            <div class="phase-card phase-30">
+                <div class="phase-icon"><i class="fas fa-search"></i></div>
+                <span class="subtitle">Days 0-30</span>
+                <h2>The Audit</h2>
+                <p>Focus on understanding the current landscape, data integrity, and cultural nuances without making premature changes.</p>
+                
+                <ul class="checklist">
+                    <li><strong>HRIS Audit:</strong> Assess data quality in current systems (Workday/SAP) to identify gaps.</li>
+                    <li><strong>Stakeholder Interviews:</strong> Meet with Dept Heads to understand their pain points with HR.</li>
+                    <li><strong>Process Mapping:</strong> Document the current Recruitment and Payroll workflows to spot inefficiencies.</li>
+                    <li><strong>Compliance Check:</strong> Ensure all employee files meet statutory requirements.</li>
+                </ul>
+
+                <div class="outcome">
+                    <strong>🏆 Deliverable:</strong>
+                    A "State of HR" Report identifying the top 3 bottlenecks in the current system.
+                </div>
+            </div>
+
+            <div class="phase-card phase-60">
+                <div class="phase-icon"><i class="fas fa-tools"></i></div>
+                <span class="subtitle">Days 31-60</span>
+                <h2>Alignment & Quick Wins</h2>
+                <p>Implementing low-hanging fruit solutions and aligning HR metrics with business goals.</p>
+                
+                <ul class="checklist">
+                    <li><strong>Deploy Dashboards:</strong> Implementation of the "HR Command Center" for real-time tracking of Turnover & Absenteeism.</li>
+                    <li><strong>Optimize Onboarding:</strong> Streamline the Day 1 experience to reduce cognitive load on new hires.</li>
+                    <li><strong>Fix Data Gaps:</strong> Clean up the database errors identified in the audit phase.</li>
+                    <li><strong>Training Needs Analysis:</strong> Launch a survey to identify skill gaps in the workforce.</li>
+                </ul>
+
+                <div class="outcome">
+                    <strong>🏆 Deliverable:</strong>
+                    Live HR Dashboard implementation and reduction of administrative time by ~15%.
+                </div>
+            </div>
+
+            <div class="phase-card phase-90">
+                <div class="phase-icon"><i class="fas fa-rocket"></i></div>
+                <span class="subtitle">Days 61-90</span>
+                <h2>Execution & Strategy</h2>
+                <p>Shifting from reactive fixing to proactive strategy and long-term talent development.</p>
+                
+                <ul class="checklist">
+                    <li><strong>Predictive Modeling:</strong> Use Python scripts to forecast hiring needs for the next quarter.</li>
+                    <li><strong>L&D Launch:</strong> Roll out targeted training programs based on the ROI Calculator.</li>
+                    <li><strong>Employer Branding:</strong> Revamp job descriptions and career page based on psychology principles.</li>
+                    <li><strong>Quarterly Review:</strong> Present Q1 impact report to leadership with financial ROI data.</li>
+                </ul>
+
+                <div class="outcome">
+                    <strong>🏆 Deliverable:</strong>
+                    A fully operational, data-driven HR ecosystem that predicts needs rather than reacting to them.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to discuss execution?</h2>
+            <p style="margin-bottom: 20px; color: #666;">I don't just plan; I build the tools to make the plan work.</p>
+            <a href="index.html#contact" class="btn">Schedule an Interview</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Insights - Anshuman Yadav</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f7fafc; color: #2d3748; line-height: 1.8; }
+
+        /* Navigation */
+        nav { background: #fff; padding: 15px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        nav .container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        nav .logo { font-weight: 700; font-size: 1.2rem; color: #5a67d8; text-decoration: none; }
+        nav .back-link { text-decoration: none; color: #666; font-size: 0.9rem; font-weight: 500; }
+        nav .back-link:hover { color: #5a67d8; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Blog Header */
+        header { text-align: center; margin-bottom: 60px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; color: #2d3748; }
+        header p { color: #718096; font-size: 1.1rem; }
+
+        /* Articles */
+        .article-card { background: #fff; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #5a67d8; transition: transform 0.2s; }
+        .article-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+        
+        .meta { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.85rem; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .tag { background: #ebf4ff; color: #5a67d8; padding: 2px 10px; border-radius: 4px; }
+        
+        h2 { font-size: 1.8rem; margin-bottom: 15px; line-height: 1.3; }
+        h2 a { text-decoration: none; color: #2d3748; transition: color 0.2s; }
+        h2 a:hover { color: #5a67d8; }
+        
+        .excerpt { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
+        .read-more { color: #5a67d8; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+        .read-more:hover { gap: 8px; transition: gap 0.2s; }
+
+        /* Footer */
+        footer { text-align: center; margin-top: 80px; color: #a0aec0; font-size: 0.9rem; padding-bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Anshuman Yadav</a>
+            <a href="index.html" class="back-link">Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>HR Insights & Analytics</h1>
+            <p>Thoughts on Organizational Behavior, Data, and the Psychology of Work.</p>
+        </header>
+
+        <article class="article-card">
+            <div class="meta">
+                <span>Dec 28, 2025</span>
+                <span class="tag">Psychology</span>
+            </div>
+            <h2><a href="#">The Hidden Cost of "Resilience": A Psychological Perspective</a></h2>
+            <p class="excerpt">We often hire for resilience, but are we actually hiring for burnout tolerance? Analyzing the fine line between adaptability and systemic inefficiency using Big 5 personality traits.</p>
+            <a href="blog-resilience.html" class="read-more">Read Essay &rarr;</a>
+        </article>
+
+        <article class="article-card">
+            <div class="meta">
+                <span>Dec 20, 2025</span>
+                <span class="tag">Analytics</span>
+            </div>
+            <h2><a href="#">Why I Built a Python-Based HRIS Instead of Using Excel</a></h2>
+            <p class="excerpt">Excel is great, but it's not a database. A technical deep dive into how I used Flask and SQLAlchemy to build a secure, scalable employee management system that handles relational data correctly.</p>
+            <a href="https://github.com/byanshuman/HRM-System-Python" target="_blank" class="read-more">View Project Code &rarr;</a>
+        </article>
+
+        <article class="article-card">
+            <div class="meta">
+                <span>Nov 15, 2025</span>
+                <span class="tag">Strategy</span>
+            </div>
+            <h2><a href="#">Calculating the ROI of Training: It's Not Just a Guess</a></h2>
+            <p class="excerpt">Most L&D budgets get cut because they lack financial accountability. Here is the mathematical formula I use to project productivity gains against training costs.</p>
+            <a href="tools.html" class="read-more">Try the Calculator &rarr;</a>
+        </article>
+
+    </div>
+
+    <footer>
+        &copy; 2025 Anshuman Yadav. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Case Study: Building a Custom HRIS in Python">
+    <meta property="og:description" content="How I moved from Excel to a SQL-backed HR architecture using Flask and SQLAlchemy.">
+    
+    <title>Project: Python HRIS Architecture - Anshuman Yadav</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap'); /* For Code */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f7fafc; color: #2d3748; line-height: 1.7; }
+
+        /* Nav */
+        nav { background: #fff; padding: 15px 0; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
+        nav .container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        nav .logo { font-weight: 700; font-size: 1.2rem; color: #5a67d8; text-decoration: none; }
+        nav .back-link { text-decoration: none; color: #666; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        nav .back-link:hover { color: #5a67d8; }
+
+        /* Header */
+        .case-header { background: #1a202c; color: white; padding: 80px 0 60px; text-align: center; }
+        .case-header h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        .case-header p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        .tags { margin-top: 20px; }
+        .tag { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin: 0 5px; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Content */
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        
+        .section { margin-bottom: 60px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .section h2 { font-size: 1.8rem; margin-bottom: 20px; color: #2d3748; border-left: 5px solid #5a67d8; padding-left: 15px; }
+        .section h3 { font-size: 1.2rem; margin: 30px 0 15px; color: #4a5568; }
+        .section p { margin-bottom: 20px; color: #4a5568; }
+
+        /* Code Blocks */
+        pre { background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        code { font-family: 'Fira Code', monospace; color: #ec87bf; }
+
+        /* Diagrams (CSS Implementation) */
+        .diagram { display: flex; gap: 20px; justify-content: center; margin: 40px 0; flex-wrap: wrap; }
+        .db-table { border: 2px solid #cbd5e0; border-radius: 8px; width: 200px; background: #fff; overflow: hidden; }
+        .db-header { background: #edf2f7; padding: 10px; font-weight: 700; text-align: center; border-bottom: 2px solid #cbd5e0; }
+        .db-row { padding: 8px 15px; border-bottom: 1px solid #eee; font-size: 0.9rem; display: flex; justify-content: space-between; }
+        .pk { color: #e53e3e; font-size: 0.7rem; font-weight: bold; }
+        .fk { color: #3182ce; font-size: 0.7rem; font-weight: bold; }
+
+        .btn { display: inline-block; background: #5a67d8; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 600; margin-top: 20px; }
+        .btn:hover { background: #4c51bf; }
+
+        /* Footer */
+        footer { text-align: center; color: #a0aec0; padding: 40px 0; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Anshuman Yadav</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <header class="case-header">
+        <div class="container">
+            <h1>Architecture of a Python HRIS</h1>
+            <p>Moving beyond Excel: How I built a relational database system to handle Employee Data, Payroll, and Security.</p>
+            <div class="tags">
+                <span class="tag">Python Flask</span>
+                <span class="tag">SQLAlchemy</span>
+                <span class="tag">JWT Auth</span>
+                <span class="tag">REST API</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="section">
+            <h2>The Business Problem</h2>
+            <p>Most HR departments rely on "Excel Chaos." Data is scattered across spreadsheets, leading to:</p>
+            <ul>
+                <li><strong>Redundancy:</strong> Employee data is duplicated in Payroll and Recruitment sheets.</li>
+                <li><strong>Security Risks:</strong> Files are emailed without encryption.</li>
+                <li><strong>Lack of Integrity:</strong> No validation (e.g., entering text in a salary field).</li>
+            </ul>
+            <p>I built this system to demonstrate how <strong>Relational Databases (SQL)</strong> solve these specific HR operational failures.</p>
+        </div>
+
+        <div class="section">
+            <h2>Database Architecture (Schema)</h2>
+            <p>Unlike Excel, I used a normalized SQL database structure to ensure data integrity. Here is a simplified view of the Entity Relationship Diagram (ERD) I designed:</p>
+            
+            <div class="diagram">
+                <div class="db-table">
+                    <div class="db-header">Employees</div>
+                    <div class="db-row"><span>id</span> <span class="pk">PK</span></div>
+                    <div class="db-row"><span>email</span> <span>Unique</span></div>
+                    <div class="db-row"><span>password_hash</span> <span>String</span></div>
+                    <div class="db-row"><span>dept_id</span> <span class="fk">FK</span></div>
+                </div>
+                
+                <div class="db-table">
+                    <div class="db-header">Department</div>
+                    <div class="db-row"><span>id</span> <span class="pk">PK</span></div>
+                    <div class="db-row"><span>name</span> <span>String</span></div>
+                    <div class="db-row"><span>cost_center</span> <span>Int</span></div>
+                </div>
+
+                <div class="db-table">
+                    <div class="db-header">Payroll</div>
+                    <div class="db-row"><span>id</span> <span class="pk">PK</span></div>
+                    <div class="db-row"><span>employee_id</span> <span class="fk">FK</span></div>
+                    <div class="db-row"><span>base_salary</span> <span>Float</span></div>
+                    <div class="db-row"><span>tax_code</span> <span>String</span></div>
+                </div>
+            </div>
+            
+            <p><em>The <strong>FK (Foreign Key)</strong> relationships ensure that you cannot pay a salary to an employee who doesn't exist—an error impossible to prevent in Excel.</em></p>
+        </div>
+
+        <div class="section">
+            <h2>Security Implementation</h2>
+            <p>HR data is sensitive. I implemented <strong>Password Hashing</strong> using <code>bcrypt</code> instead of storing plain text, and <strong>JWT (JSON Web Tokens)</strong> for API access.</p>
+            
+            <h3>Code Snippet: Secure Model</h3>
+            <pre>
+class Employee(db.Model):
+    __tablename__ = 'employees'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256))
+
+    def set_password(self, password):
+        # Never store plain text!
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)</pre>
+        
+            <p>This code proves I understand <strong>GDPR/Data Privacy</strong> compliance at a technical level, not just a policy level.</p>
+        </div>
+
+        <div class="section">
+            <h2>The Outcome</h2>
+            <p>This project serves as a "Proof of Concept" for a headless HR backend. By decoupling the data (Backend) from the view (Frontend), this system allows for:</p>
+            <ul>
+                <li><strong>Scalability:</strong> Handling 10,000+ records without crashing.</li>
+                <li><strong>Integration:</strong> The API endpoints allow payroll data to flow directly into accounting software.</li>
+                <li><strong>Audit Trails:</strong> Every change is tracked (unlike a shared Excel file).</li>
+            </ul>
+            <center>
+                <a href="https://github.com/byanshuman/HRM-System-Python" target="_blank" class="btn"><i class="fab fa-github"></i> View Source Code</a>
+            </center>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2025 Anshuman Yadav. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
