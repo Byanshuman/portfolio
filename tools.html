@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Command Center - Anshuman Yadav</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
@@ -23,12 +24,8 @@
         
         /* Tabs */
         .tabs { 
-            display: flex; 
-            gap: 10px; 
-            margin-bottom: 30px; 
-            border-bottom: 2px solid #e2e8f0; 
-            overflow-x: auto; /* Allow scrolling on small screens */
-            padding-bottom: 5px;
+            display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; 
+            overflow-x: auto; padding-bottom: 5px;
         }
         .tab-btn {
             background: none; border: none; padding: 15px 20px; font-family: inherit; font-size: 0.95rem; 
@@ -69,7 +66,9 @@
         .danger-text { color: #e53e3e; }
         .warning-text { color: #d69e2e; }
 
-        /* Responsive */
+        /* Chart Containers */
+        .chart-container { position: relative; height: 250px; width: 100%; margin-top: 20px; }
+
         @media(max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .tabs { padding-bottom: 10px; } }
     </style>
 </head>
@@ -96,7 +95,7 @@
         <div id="turnover" class="tool-panel active">
             <div class="card">
                 <h2>Retention Impact Calculator</h2>
-                <p class="desc">Calculate the hidden financial impact of losing a key employee, including vacancy costs and productivity ramp-up.</p>
+                <p class="desc">Calculate the hidden financial impact of losing a key employee, visualized by cost category.</p>
                 
                 <div class="grid-2">
                     <div>
@@ -112,17 +111,21 @@
                             <label>Days Position Vacant</label>
                             <input type="number" id="t_days" value="45">
                         </div>
-                        <button class="action-btn" onclick="calcTurnover()">Calculate Loss</button>
+                        <button class="action-btn" onclick="calcTurnover()">Calculate & Visualize</button>
                     </div>
                     
                     <div class="result-box" id="t_result" style="display:none;">
-                        <label>Estimated Total Loss</label>
+                        <label>Total Business Loss</label>
                         <div class="big-number danger-text" id="t_total">₹0</div>
-                        <p style="font-size: 0.9rem; color: #666;">This represents <strong id="t_percent">0%</strong> of the annual salary.</p>
+                        
+                        <div class="chart-container">
+                            <canvas id="turnoverChart"></canvas>
+                        </div>
+
                         <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
-                        <div style="font-size: 0.9rem;">
-                            <p><strong>Vacancy Loss:</strong> <span id="t_vacancy">₹0</span></p>
-                            <p><strong>Productivity Loss:</strong> <span id="t_prod">₹0</span></p>
+                        <div style="font-size: 0.9rem; display: flex; justify-content: space-between;">
+                            <span>Vacancy Loss: <strong id="t_vacancy">₹0</strong></span>
+                            <span>Productivity Loss: <strong id="t_prod">₹0</strong></span>
                         </div>
                     </div>
                 </div>
@@ -360,10 +363,13 @@
             evt.currentTarget.className += " active";
         }
 
+        // Global Chart Variable
+        let myChart = null;
+
         // Formatter
         const money = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
 
-        // 1. Turnover Logic
+        // 1. Turnover Logic with CHART
         function calcTurnover() {
             const salary = parseFloat(document.getElementById('t_salary').value);
             const hiring = parseFloat(document.getElementById('t_hiring').value);
@@ -377,8 +383,44 @@
             document.getElementById('t_total').innerText = money.format(total);
             document.getElementById('t_vacancy').innerText = money.format(vacancyCost);
             document.getElementById('t_prod').innerText = money.format(productivityLoss);
-            document.getElementById('t_percent').innerText = ((total/salary)*100).toFixed(1) + "%";
             document.getElementById('t_result').style.display = 'block';
+
+            // DRAW CHART
+            const ctx = document.getElementById('turnoverChart').getContext('2d');
+            
+            // Destroy previous chart if exists
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Hiring Costs', 'Vacancy Loss', 'Productivity Ramp-up'],
+                    datasets: [{
+                        data: [hiring, vacancyCost, productivityLoss],
+                        backgroundColor: [
+                            '#667eea', // Purple
+                            '#ecc94b', // Yellow
+                            '#ed8936'  // Orange
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Breakdown of Financial Loss'
+                        }
+                    }
+                }
+            });
         }
 
         // 2. ROI Logic
@@ -429,7 +471,6 @@
             
             if(!spells || !days) return;
 
-            // Formula: S * S * D
             const score = (spells * spells) * days;
             
             const scoreEl = document.getElementById('b_score');
@@ -437,7 +478,6 @@
             
             scoreEl.innerText = score;
             
-            // Severity Logic
             if(score <= 50) {
                 scoreEl.style.color = "#38a169"; // Green
                 msgEl.innerText = "No Concern. Within acceptable limits.";
@@ -479,10 +519,8 @@
             const msgEl = document.getElementById('c_message');
             const bar = document.getElementById('c_bar');
             
-            // Visual Bar Logic (Cap at 0% and 200% for CSS width)
             const rangeSpan = max - min;
             const positionInRange = ((salary - min) / rangeSpan) * 100;
-            // Clamp between 0 and 100
             const visualWidth = Math.max(0, Math.min(100, positionInRange));
             
             bar.style.width = visualWidth + "%";
@@ -508,86 +546,114 @@
             const list = document.getElementById('i_questions_list');
             const indic = document.getElementById('i_indicators');
             
-            // Database of Questions
+            // Database of Questions (Expanded V2.0)
             const db = {
                 'resilience': {
                     'entry': [
-                        "Tell me about a time you received critical feedback. How did you handle it?",
-                        "Describe a situation where a project didn't go as planned. What was your immediate reaction?"
+                        "Tell me about a time you received critical feedback. How did you handle it?", 
+                        "Describe a situation where a project didn't go as planned. What was your immediate reaction?",
+                        "Tell me about a time you had to learn a new skill very quickly to complete a task.",
+                        "Describe a time you were overwhelmed by your workload. How did you prioritize?"
                     ],
                     'mid': [
-                        "Describe a time you had to pivot your team's strategy due to a sudden market change.",
-                        "Tell me about a significant failure in your career. What specific steps did you take to recover?"
+                        "Describe a time you had to pivot your team's strategy due to a sudden market change.", 
+                        "Tell me about a significant failure in your career. What specific steps did you take to recover?",
+                        "Tell me about a time you had to deliver results with significantly fewer resources than you requested.",
+                        "Describe a time you had to keep your team motivated during a period of uncertainty or layoffs."
                     ],
                     'exec': [
-                        "Share an example of a time you led an organization through a crisis. How did you maintain morale?",
-                        "Describe a situation where you had to make a high-stakes decision with incomplete information."
+                        "Share an example of a time you led an organization through a crisis. How did you maintain morale?", 
+                        "Describe a situation where you had to make a high-stakes decision with incomplete information.",
+                        "Tell me about a time you faced intense scrutiny from the board or investors. How did you respond?",
+                        "Describe a time you had to rebuild trust with a client or department after a major breach."
                     ],
                     'psych': "Look for: Internal Locus of Control (taking responsibility) vs. External Blaming. Candidates should demonstrate 'Growth Mindset'—viewing failure as data rather than a personal deficit."
                 },
                 'conflict': {
                     'entry': [
-                        "Tell me about a time you disagreed with a peer. How did you resolve it?",
-                        "Describe a time you had to work with a difficult personality."
+                        "Tell me about a time you disagreed with a peer. How did you resolve it?", 
+                        "Describe a time you had to work with a difficult personality.",
+                        "Tell me about a time you felt a supervisor treated you unfairly. How did you address it?",
+                        "Describe a time there was a miscommunication that caused an error. How did you fix it?"
                     ],
                     'mid': [
-                        "Describe a situation where you had to mediate a dispute between two direct reports.",
-                        "Tell me about a time you had to push back against a senior manager's decision."
+                        "Describe a situation where you had to mediate a dispute between two direct reports.", 
+                        "Tell me about a time you had to push back against a senior manager's decision.",
+                        "Describe a time you had to negotiate with a stakeholder who was initially hostile to your idea.",
+                        "Tell me about a time you had to align two departments with competing KPIs."
                     ],
                     'exec': [
-                        "Tell me about a time you navigated a political conflict between departments.",
-                        "Describe how you handle misalignment between the board's vision and operational reality."
+                        "Tell me about a time you navigated a political conflict between departments.", 
+                        "Describe how you handle misalignment between the board's vision and operational reality.",
+                        "Tell me about a time you had to dissolve a partnership or fire a key vendor.",
+                        "Describe a time you had to manage a 'culture clash' during a merger or acquisition."
                     ],
                     'psych': "Look for: Emotional Regulation and 'I' statements. High-potential candidates focus on the solution, not the drama. Watch for Empathy—can they articulate the other person's perspective?"
                 },
                 'leadership': {
                     'entry': [
-                        "Tell me about a time you took initiative outside of your job description.",
-                        "Describe a time you had to persuade others to adopt your idea."
+                        "Tell me about a time you took initiative outside of your job description.", 
+                        "Describe a time you had to persuade others to adopt your idea.",
+                        "Tell me about a time you stepped up to lead when the designated leader was absent.",
+                        "Describe a time you mentored or trained a peer who was struggling."
                     ],
                     'mid': [
-                        "Describe a time you had to deliver bad news to your team. How did you frame it?",
-                        "Tell me about how you developed an underperforming employee into a top performer."
+                        "Describe a time you had to deliver bad news to your team. How did you frame it?", 
+                        "Tell me about how you developed an underperforming employee into a top performer.",
+                        "Describe a time you had to build a team from scratch. What traits did you look for?",
+                        "Tell me about a time you delegated a task that you really wanted to do yourself."
                     ],
                     'exec': [
-                        "Describe your philosophy on organizational culture. How do you operationalize it?",
-                        "Tell me about a strategic risk you took that paid off. What was your calculation?"
+                        "Describe your philosophy on organizational culture. How do you operationalize it?", 
+                        "Tell me about a strategic risk you took that paid off. What was your calculation?",
+                        "Describe the most difficult personnel decision (layoffs/restructuring) you have ever made.",
+                        "Tell me about a time you had to sacrifice short-term profits for long-term vision."
                     ],
                     'psych': "Look for: Transformational Leadership traits (vision, inspiration) vs. Transactional traits (rewards/punishment). Do they speak about 'We' or 'I'? True leaders share credit."
                 },
                 'innovation': {
                     'entry': [
-                        "Tell me about a process you improved in your last role.",
-                        "Describe a creative solution you found to a routine problem."
+                        "Tell me about a process you improved in your last role.", 
+                        "Describe a creative solution you found to a routine problem.",
+                        "Tell me about a time you challenged the 'status quo' or the way things were always done.",
+                        "Describe a time you identified a mistake in a standard procedure."
                     ],
                     'mid': [
-                        "Describe a time you championed a new technology or tool despite resistance.",
-                        "Tell me about a time you identified a gap in the market or workflow."
+                        "Describe a time you championed a new technology or tool despite resistance.", 
+                        "Tell me about a time you identified a gap in the market or workflow.",
+                        "Describe a time you created an environment where it was safe for your team to fail.",
+                        "Tell me about a product or initiative you launched from concept to execution."
                     ],
                     'exec': [
-                        "How do you foster a culture of innovation in a risk-averse environment?",
-                        "Describe a time you disrupted your own business model to stay competitive."
+                        "How do you foster a culture of innovation in a risk-averse environment?", 
+                        "Describe a time you disrupted your own business model to stay competitive.",
+                        "Tell me about a time you greenlit a 'moonshot' project. What was the outcome?",
+                        "Describe how you ensure your organization stays agile as it scales."
                     ],
                     'psych': "Look for: Openness to Experience (Big 5 Trait). Candidates should demonstrate curiosity and the ability to connect unrelated concepts (divergent thinking)."
                 },
                 'integrity': {
                     'entry': [
-                        "Tell me about a time you were asked to do something you felt was unethical.",
-                        "Describe a time you made a mistake that no one else noticed. What did you do?"
+                        "Tell me about a time you were asked to do something you felt was unethical.", 
+                        "Describe a time you made a mistake that no one else noticed. What did you do?",
+                        "Tell me about a time you had to admit you didn't know the answer.",
+                        "Describe a time you saw a colleague cutting corners. How did you handle it?"
                     ],
                     'mid': [
-                        "Describe a time you had to enforce a policy that made you unpopular.",
-                        "Tell me about a time you prioritized long-term reputation over short-term gain."
+                        "Describe a time you had to enforce a policy that made you unpopular.", 
+                        "Tell me about a time you prioritized long-term reputation over short-term gain.",
+                        "Describe a time you discovered a discrepancy in financial or performance data.",
+                        "Tell me about a time you had to give honest feedback to a friend/colleague that risked the friendship."
                     ],
                     'exec': [
-                        "Describe a situation where transparency could have hurt the stock price/brand. How did you handle it?",
-                        "Tell me about a time your values conflicted with business objectives."
+                        "Describe a situation where transparency could have hurt the stock price/brand. How did you handle it?", 
+                        "Tell me about a time your values conflicted with business objectives.",
+                        "Describe a time you took public responsibility for a systemic failure in your organization.",
+                        "Tell me about a time you turned down a profitable opportunity because it didn't align with company values."
                     ],
                     'psych': "Look for: Consistency and Moral Courage. Watch for hesitation or 'rehearsed' answers. Authentic integrity often involves admitting to vulnerability or difficulty in the decision."
                 }
             };
-
-            // Generate Output
             let html = "<ul style='padding-left: 20px;'>";
             if(db[comp] && db[comp][level]) {
                 db[comp][level].forEach(q => {
