@@ -190,6 +190,43 @@
             box-shadow: 0 4px 12px rgba(90, 103, 216, 0.3);
         }
 
+        .contact-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #formMessage {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #formMessage.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #formMessage.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        body.dark #formMessage.success {
+            background: #1e4620;
+            color: #d4edda;
+            border-color: #2d5930;
+        }
+
+        body.dark #formMessage.error {
+            background: #491217;
+            color: #f8d7da;
+            border-color: #6b1f28;
+        }
+
         /* Footer */
         footer { background: #1a202c; color: #fff; text-align: center; padding: 40px 0; }
         .social-links a { color: #fff; font-size: 1.5rem; margin: 0 15px; opacity: 0.7; transition: opacity 0.3s; }
@@ -353,12 +390,13 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="message" rows="4" placeholder="Message" required></textarea>
-                        <button type="submit">Send Message</button>
+                    <form id="contactForm">
+                        <input type="text" name="name" id="name" placeholder="Your Name" required>
+                        <input type="email" name="email" id="email" placeholder="Your Email" required>
+                        <textarea name="message" id="message" rows="4" placeholder="Message" required></textarea>
+                        <button type="submit" id="submitBtn">Send Message</button>
                     </form>
+                    <div id="formMessage"></div>
                 </div>
             </div>
         </div>
@@ -376,12 +414,68 @@
     </footer>
 
     <script>
+        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark');
             themeToggle.innerHTML = body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Google Sheets Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        
+        // REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const GOOGLE_SCRIPT_URL = https://script.google.com/macros/s/AKfycbxUpaxhjXTaqnv9vT1swB3hviM2xGn0NyQd9zcmYs3bNugLVQkIBVwKuX-yFufw1J5MTQ/exec;
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            formMessage.style.display = 'none';
+            formMessage.className = '';
+            
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Show success message
+                formMessage.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+                formMessage.className = 'success';
+                formMessage.style.display = 'block';
+                
+                // Reset form
+                contactForm.reset();
+                
+            } catch (error) {
+                // Show error message
+                formMessage.textContent = '✗ Something went wrong. Please email me directly at bytheanshuman@gmail.com';
+                formMessage.className = 'error';
+                formMessage.style.display = 'block';
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
         });
     </script>
 </body>
