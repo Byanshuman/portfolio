@@ -129,6 +129,67 @@
         body.dark .timeline-item::before { border-color: #1a202c; }
         .exp-date { font-size: 0.85rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
 
+        /* Contact Section */
+        #contact { background: #fff; padding: 80px 0; }
+        body.dark #contact { background: #1a202c; }
+        
+        .contact-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px; }
+        .contact-info { flex: 1; min-width: 300px; }
+        .contact-form { flex: 1; min-width: 300px; }
+        
+        .contact-info p { margin-bottom: 15px; line-height: 1.8; }
+        body.dark .contact-info p { color: #cbd5e0; }
+        
+        .contact-info strong { color: #2d3748; }
+        body.dark .contact-info strong { color: #f7fafc; }
+        
+        .contact-info a { color: #5a67d8; text-decoration: none; transition: color 0.3s; }
+        .contact-info a:hover { color: #764ba2; }
+        
+        .contact-form form { display: flex; flex-direction: column; gap: 15px; }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            background: #fff;
+            color: #2d3748;
+        }
+        
+        body.dark .contact-form input,
+        body.dark .contact-form textarea {
+            background: #2d3748;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #5a67d8;
+        }
+        
+        .contact-form button {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(90, 103, 216, 0.3);
+        }
+
         /* Footer */
         footer { background: #1a202c; color: #fff; text-align: center; padding: 40px 0; }
         .social-links a { color: #fff; font-size: 1.5rem; margin: 0 15px; opacity: 0.7; transition: opacity 0.3s; }
@@ -142,6 +203,7 @@
             .feature-list { grid-template-columns: 1fr; }
             nav .container { flex-direction: column; }
             nav ul { margin-top: 15px; }
+            .contact-grid { flex-direction: column; }
         }
     </style>
 </head>
@@ -280,22 +342,22 @@
         </div>
     </section>
 
-    <section id="contact" style="background: #fff; padding: 80px 0;">
+    <section id="contact">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px;">
-                <div style="flex: 1; min-width: 300px;">
+            <div class="contact-grid">
+                <div class="contact-info">
                     <p style="margin-bottom: 20px;">I am currently open to full-time opportunities in HR Operations and Analytics. Feel free to connect via LinkedIn or Email.</p>
-                    <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:bytheanshuman@gmail.com" style="color: #5a67d8; text-decoration: none;">bytheanshuman@gmail.com</a></p>
+                    <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:bytheanshuman@gmail.com">bytheanshuman@gmail.com</a></p>
                     <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Prayagraj, Uttar Pradesh, India</p>
                 </div>
                 
-                <div style="flex: 1; min-width: 300px;">
-                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
-                        <input type="text" name="name" placeholder="Your Name" required style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 5px;">
-                        <input type="email" name="email" placeholder="Your Email" required style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 5px;">
-                        <textarea name="message" rows="4" placeholder="Message" required style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 5px;"></textarea>
-                        <button type="submit" class="btn btn-primary" style="background: #5a67d8; color: white; border: none; cursor: pointer;">Send Message</button>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" rows="4" placeholder="Message" required></textarea>
+                        <button type="submit">Send Message</button>
                     </form>
                 </div>
             </div>
