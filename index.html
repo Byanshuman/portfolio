@@ -3,261 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Anshuman Yadav, an HR Professional & Analyst specializing in Strategic HR, Behavioral Science, and Data Analytics.">
     <title>Anshuman Yadav - HR Professional & Analyst</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #2d3748;
-            background-color: #f7fafc;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.dark { background-color: #1a202c; color: #e2e8f0; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* Navigation */
-        nav {
-            position: sticky; top: 0; background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px); box-shadow: 0 1px 3px rgba(0,0,0,0.1); z-index: 1000;
-        }
-        body.dark nav { background-color: rgba(26, 32, 44, 0.95); }
-        nav .container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        nav .logo { font-size: 1.4rem; font-weight: 700; color: #5a67d8; }
-        nav ul { list-style: none; display: flex; }
-        nav ul li { margin-left: 30px; }
-        nav ul li a { text-decoration: none; color: #4a5568; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
-        body.dark nav ul li a { color: #cbd5e0; }
-        nav ul li a:hover { color: #5a67d8; }
-
-        .theme-toggle { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #4a5568; margin-left: 20px; }
-        body.dark .theme-toggle { color: #e2e8f0; }
-
-        /* Hero Section */
-        #hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff; padding: 120px 0 100px; text-align: center;
-        }
-        #hero h1 { font-size: 3rem; margin-bottom: 15px; letter-spacing: -1px; }
-        #hero p { font-size: 1.25rem; margin-bottom: 35px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; }
-
-        .btn {
-            display: inline-block; padding: 12px 30px; border-radius: 50px; font-weight: 600;
-            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
-        }
-        .btn-primary { background-color: #fff; color: #5a67d8; border: none; }
-        .btn-secondary { background-color: transparent; border: 2px solid #fff; color: #fff; margin-left: 15px; }
-        .btn-download { background-color: #5a67d8; color: white; border: none; margin-top: 25px; }
-        
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-
-        /* About Section */
-        #about { padding: 100px 0; background: #fff; }
-        body.dark #about { background: #1a202c; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
-        
-        .profile-wrapper { position: relative; text-align: center; }
-        .profile-wrapper img {
-            width: 280px; height: 280px; border-radius: 50%; object-fit: cover; object-position: top center;
-            border: 5px solid #fff; box-shadow: 0 10px 25px rgba(90, 103, 216, 0.3);
-        }
-        .badge {
-            position: absolute; bottom: 20px; right: 20px; background: #ecc94b; color: #744210;
-            padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .section-title { font-size: 2rem; margin-bottom: 40px; position: relative; display: inline-block; color: #2d3748; }
-        body.dark .section-title { color: #f7fafc; }
-        .section-title::after {
-            content: ''; position: absolute; left: 0; bottom: -5px; width: 60px; height: 4px; background: #5a67d8; border-radius: 2px;
-        }
-
-        /* PROJECT SECTION STYLES */
-        #featured { padding: 100px 0; background: #f7fafc; }
-        body.dark #featured { background: #2d3748; }
-
-        /* Flagship Card */
-        .flagship-card {
-            background: #fff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            padding: 40px; margin-bottom: 50px; border-left: 6px solid #667eea;
-            display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start;
-        }
-        body.dark .flagship-card { background: #1a202c; border-left-color: #5a67d8; }
-
-        .flagship-content { flex: 2; min-width: 300px; }
-        .flagship-actions { flex: 1; min-width: 250px; background: #f9f9f9; padding: 20px; border-radius: 8px; }
-        body.dark .flagship-actions { background: #2d3748; border: 1px solid #4a5568; }
-
-        .flagship-title { font-size: 1.8rem; margin-bottom: 15px; color: #2d3748; }
-        body.dark .flagship-title { color: #fff; }
-
-        .feature-list { list-style: none; margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .feature-list li { font-size: 0.9rem; color: #555; }
-        body.dark .feature-list li { color: #cbd5e0; }
-        .feature-list li i { color: #2ecc71; margin-right: 8px; }
-
-        /* Standard Grid */
-        .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .tool-card {
-            background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s; border-top: 4px solid #a0aec0; display: flex; flex-direction: column;
-        }
-        body.dark .tool-card { background: #1a202c; border-top-color: #718096; }
-        .tool-card:hover { transform: translateY(-5px); }
-
-        .tool-icon { font-size: 2rem; color: #718096; margin-bottom: 20px; }
-        .tool-card h3 { margin-bottom: 10px; font-size: 1.25rem; }
-        .tool-card p { color: #718096; margin-bottom: 20px; flex-grow: 1; font-size: 0.9rem; }
-        .tool-link { color: #5a67d8; font-weight: 600; text-decoration: none; }
-
-        /* Experience Timeline */
-        #experience { padding: 100px 0; background: #fff; }
-        body.dark #experience { background: #1a202c; }
-        .timeline-item { border-left: 3px solid #cbd5e0; padding-left: 30px; margin-bottom: 40px; position: relative; }
-        body.dark .timeline-item { border-left-color: #4a5568; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -10px; top: 0; width: 17px; height: 17px; background: #5a67d8;
-            border-radius: 50%; border: 3px solid #fff;
-        }
-        body.dark .timeline-item::before { border-color: #1a202c; }
-        .exp-date { font-size: 0.85rem; color: #718096; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
-
-        /* Contact Section */
-        #contact { background: #fff; padding: 80px 0; }
-        body.dark #contact { background: #1a202c; }
-        
-        .contact-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 40px; }
-        .contact-info { flex: 1; min-width: 300px; }
-        .contact-form { flex: 1; min-width: 300px; }
-        
-        .contact-info p { margin-bottom: 15px; line-height: 1.8; }
-        body.dark .contact-info p { color: #cbd5e0; }
-        
-        .contact-info strong { color: #2d3748; }
-        body.dark .contact-info strong { color: #f7fafc; }
-        
-        .contact-info a { color: #5a67d8; text-decoration: none; transition: color 0.3s; }
-        .contact-info a:hover { color: #764ba2; }
-        
-        .contact-form form { display: flex; flex-direction: column; gap: 15px; }
-        .contact-form input,
-        .contact-form textarea {
-            padding: 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
-            background: #fff;
-            color: #2d3748;
-        }
-        
-        body.dark .contact-form input,
-        body.dark .contact-form textarea {
-            background: #2d3748;
-            border-color: #4a5568;
-            color: #e2e8f0;
-        }
-        
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #5a67d8;
-        }
-        
-        .contact-form button {
-            background: #5a67d8;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .contact-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(90, 103, 216, 0.3);
-        }
-
-        .contact-form button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        #formMessage {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        #formMessage.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        #formMessage.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        body.dark #formMessage.success {
-            background: #1e4620;
-            color: #d4edda;
-            border-color: #2d5930;
-        }
-
-        body.dark #formMessage.error {
-            background: #491217;
-            color: #f8d7da;
-            border-color: #6b1f28;
-        }
-
-        /* Footer */
-        footer { background: #1a202c; color: #fff; text-align: center; padding: 40px 0; }
-        .social-links a { color: #fff; font-size: 1.5rem; margin: 0 15px; opacity: 0.7; transition: opacity 0.3s; }
-        .social-links a:hover { opacity: 1; }
-
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; text-align: center; }
-            .profile-wrapper { margin-bottom: 30px; }
-            .badge { right: 50%; transform: translateX(50%); bottom: -15px; }
-            .flagship-card { padding: 20px; }
-            .feature-list { grid-template-columns: 1fr; }
-            nav .container { flex-direction: column; }
-            nav ul { margin-top: 15px; }
-            .contact-grid { flex-direction: column; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/script.js" defer></script>
 </head>
 <body>
 
     <nav>
         <div class="container">
-            <div class="logo">Anshuman Yadav</div>
+            <a href="index.html" class="logo">Anshuman Yadav</a>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#featured">Portfolio</a></li>
-                <li><a href="strategy.html" style="color: #000320; font-weight: 700;">My Strategy</a></li>
-                <li><a href="#experience">Experience</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#featured">Portfolio</a></li>
+                <li><a href="strategy.html">My Strategy</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
                 <li><a href="resume.html" target="_blank">Resume</a></li>
                 <li><a href="blog.html">Insights</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+            <div class="nav-controls">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
     </nav>
 
@@ -285,7 +52,7 @@
                     <p style="margin-bottom: 15px;">I am a dynamic HR Professional combining an <strong>MBA in HR & OB</strong> from Delhi University with a strong academic foundation in <strong>Psychology (Silver Medalist)</strong>.</p>
                     <p style="margin-bottom: 15px;">Unlike traditional HR generalists, I leverage technical skills—including <strong>Python, SQL, and HRIS Analytics</strong>—to solve complex people problems. Whether it's reducing turnover costs or optimizing recruitment funnels, I focus on measurable ROI.</p>
                     <p>I am currently seeking opportunities in <strong>HR Operations, Talent Acquisition, or HR Analytics</strong> where I can apply behavioral science to drive organizational success.</p>
-                    
+
                     <div style="margin-top: 25px;">
                         <span style="background: #ebf4ff; color: #5a67d8; padding: 5px 12px; border-radius: 4px; font-size: 0.9rem; font-weight: 600; margin-right: 10px;">Python for HR</span>
                         <span style="background: #ebf4ff; color: #5a67d8; padding: 5px 12px; border-radius: 4px; font-size: 0.9rem; font-weight: 600; margin-right: 10px;">SPSS Analysis</span>
@@ -301,13 +68,13 @@
     <section id="featured">
         <div class="container">
             <h2 class="section-title">Portfolio & Projects</h2>
-            
+
             <div class="flagship-card">
                 <div class="flagship-content">
                     <h3 class="flagship-title"><i class="fas fa-chart-line" style="color: #667eea; margin-right: 10px;"></i> HR Command Center</h3>
                     <p><strong>About this Project:</strong></p>
                     <p style="margin-bottom: 15px; color: #555;">The HR Command Center is a centralized suite of interactive tools designed to quantify human capital data. Recognizing that modern HR demands financial literacy, this dashboard enables organizations to translate "soft" HR concepts into "hard" business metrics. It serves as a proof-of-concept for digitizing HR operations without relying on heavy enterprise software.</p>
-                    
+
                     <p><strong>Key Modules Included:</strong></p>
                     <ul class="feature-list">
                         <li><i class="fas fa-check-circle"></i> <strong>Turnover Costing:</strong> Calculating financial risk of attrition.</li>
@@ -353,7 +120,7 @@
     <section id="experience">
         <div class="container">
             <h2 class="section-title">Experience & Education</h2>
-            
+
             <div style="max-width: 800px; margin-top: 40px;">
                 <div class="timeline-item">
                     <span class="exp-date">Jul 2024 - Dec 2024</span>
@@ -388,7 +155,7 @@
                     <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:bytheanshuman@gmail.com">bytheanshuman@gmail.com</a></p>
                     <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Prayagraj, Uttar Pradesh, India</p>
                 </div>
-                
+
                 <div class="contact-form">
                     <form id="contactForm">
                         <input type="text" name="name" id="name" placeholder="Your Name" required>
@@ -403,82 +170,15 @@
     </section>
 
     <footer>
-        <div class="container">
-            <div class="social-links" style="margin-bottom: 20px;">
-                <a href="https://linkedin.com/in/byanshuman" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/byanshuman" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:bytheanshuman@gmail.com"><i class="fas fa-envelope"></i></a>
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/byanshuman" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/byanshuman" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:bytheanshuman@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
             <p>&copy; 2025 Anshuman Yadav. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            themeToggle.innerHTML = body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
-
-        // Google Sheets Form Submission
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formMessage = document.getElementById('formMessage');
-        
-        // REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRzommTL2k5jHbKNnZ1q-mBc18v1patcdja_loc3PwBuhbJq6EO23_r1UIk4Pfc1hRow/exec';
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Disable button and show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            formMessage.style.display = 'none';
-            formMessage.className = '';
-            
-            const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message'),
-                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-            };
-            
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                // Show success message
-                formMessage.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
-                formMessage.className = 'success';
-                formMessage.style.display = 'block';
-                
-                // Reset form
-                contactForm.reset();
-                
-            } catch (error) {
-                // Show error message
-                formMessage.textContent = '✗ Something went wrong. Please email me directly at bytheanshuman@gmail.com';
-                formMessage.className = 'error';
-                formMessage.style.display = 'block';
-            } finally {
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-            }
-        });
-    </script>
 </body>
 </html>
-
-
