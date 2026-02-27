@@ -3,86 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HR Command Center - A suite of interactive tools for calculating Turnover Cost, Training ROI, Recruitment Funnel, and more.">
     <title>HR Command Center - Anshuman Yadav</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; color: #333; }
-
-        /* Header */
-        header { background: #fff; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; font-size: 1.2rem; color: #667eea; }
-        .back-link { text-decoration: none; color: #666; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
-        .back-link:hover { color: #667eea; }
-
-        /* Main Layout */
-        .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        
-        /* Tabs */
-        .tabs { 
-            display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; 
-            overflow-x: auto; padding-bottom: 5px;
-        }
-        .tab-btn {
-            background: none; border: none; padding: 15px 20px; font-family: inherit; font-size: 0.95rem; 
-            font-weight: 600; color: #718096; cursor: pointer; position: relative; transition: color 0.3s;
-            white-space: nowrap;
-        }
-        .tab-btn:hover { color: #667eea; }
-        .tab-btn.active { color: #667eea; }
-        .tab-btn.active::after {
-            content: ''; position: absolute; bottom: -7px; left: 0; width: 100%; height: 3px; background: #667eea; border-radius: 3px 3px 0 0;
-        }
-
-        /* Tool Content Area */
-        .tool-panel { display: none; animation: fadeIn 0.4s ease; }
-        .tool-panel.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Card Styles */
-        .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 30px; margin-bottom: 30px; }
-        .card h2 { margin-bottom: 20px; color: #2d3748; font-size: 1.5rem; }
-        .card p.desc { color: #718096; margin-bottom: 30px; }
-
-        /* Input Grids */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 500; color: #4a5568; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; }
-        input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
-        
-        /* Buttons */
-        .action-btn { background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; width: 100%; }
-        .action-btn:hover { background: #5a67d8; }
-
-        /* Results Area */
-        .result-box { background: #f7fafc; border: 1px solid #edf2f7; border-radius: 8px; padding: 25px; margin-top: 20px; }
-        .big-number { font-size: 2.5rem; font-weight: 800; color: #2d3748; margin: 10px 0; }
-        .success-text { color: #38a169; }
-        .danger-text { color: #e53e3e; }
-        .warning-text { color: #d69e2e; }
-
-        /* Chart Containers */
-        .chart-container { position: relative; height: 250px; width: 100%; margin-top: 20px; }
-
-        @media(max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .tabs { padding-bottom: 10px; } }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/script.js" defer></script>
+    <script src="assets/js/tools.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <div class="logo"><i class="fas fa-chart-line"></i> HR Command Center</div>
-            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Anshuman Yadav</a>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#featured">Portfolio</a></li>
+                <li><a href="strategy.html">My Strategy</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="resume.html" target="_blank">Resume</a></li>
+                <li><a href="blog.html">Insights</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <div class="dashboard-container">
-        
+
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'turnover')"><i class="fas fa-user-minus"></i> Cost of Turnover</button>
             <button class="tab-btn" onclick="openTab(event, 'roi')"><i class="fas fa-graduation-cap"></i> Training ROI</button>
@@ -96,7 +45,7 @@
             <div class="card">
                 <h2>Retention Impact Calculator</h2>
                 <p class="desc">Calculate the hidden financial impact of losing a key employee, visualized by cost category.</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -113,11 +62,11 @@
                         </div>
                         <button class="action-btn" onclick="calcTurnover()">Calculate & Visualize</button>
                     </div>
-                    
+
                     <div class="result-box" id="t_result" style="display:none;">
                         <label>Total Business Loss</label>
                         <div class="big-number danger-text" id="t_total">₹0</div>
-                        
+
                         <div class="chart-container">
                             <canvas id="turnoverChart"></canvas>
                         </div>
@@ -136,7 +85,7 @@
             <div class="card">
                 <h2>L&D Investment Analyzer</h2>
                 <p class="desc">Project the return on investment for training programs based on performance improvements.</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -157,7 +106,7 @@
                         </div>
                         <button class="action-btn" onclick="calcROI()">Analyze ROI</button>
                     </div>
-                    
+
                     <div class="result-box" id="r_result" style="display:none;">
                         <label>Net Benefit (1 Year)</label>
                         <div class="big-number success-text" id="r_net">₹0</div>
@@ -180,7 +129,7 @@
             <div class="card">
                 <h2>Recruitment Funnel Planner</h2>
                 <p class="desc">Estimate the number of applicants needed to achieve your hiring targets based on conversion rates.</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -213,11 +162,11 @@
                         </div>
                         <button class="action-btn" onclick="calcFunnel()">Plan Funnel</button>
                     </div>
-                    
+
                     <div class="result-box" id="f_result" style="display:none; text-align: center;">
                         <label>Total Applicants Needed</label>
                         <div class="big-number" style="color: #667eea;" id="f_applicants">0</div>
-                        
+
                         <div style="margin-top: 20px; text-align: left; background: #fff; padding: 15px; border-radius: 8px;">
                             <p style="margin-bottom: 8px;"><i class="fas fa-filter"></i> <strong>Screens Needed:</strong> <span id="f_screens">0</span></p>
                             <p style="margin-bottom: 8px;"><i class="fas fa-users"></i> <strong>Interviews Needed:</strong> <span id="f_interviews">0</span></p>
@@ -232,7 +181,7 @@
             <div class="card">
                 <h2>Bradford Factor Calculator</h2>
                 <p class="desc">A standard HR metric to weigh the operational impact of short, frequent absences versus long-term sickness. Formula: S² × D = B</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -246,7 +195,7 @@
                         </div>
                         <button class="action-btn" onclick="calcBradford()">Calculate Score</button>
                     </div>
-                    
+
                     <div class="result-box" id="b_result" style="display:none; text-align: center;">
                         <label>Bradford Score</label>
                         <div class="big-number" id="b_score">0</div>
@@ -267,7 +216,7 @@
             <div class="card">
                 <h2>Salary Compa-Ratio</h2>
                 <p class="desc">Determine if an employee is paid competitively relative to the market midpoint. Essential for compensation planning.</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -284,12 +233,12 @@
                         </div>
                         <button class="action-btn" onclick="calcCompa()">Check Competitiveness</button>
                     </div>
-                    
+
                     <div class="result-box" id="c_result" style="display:none; text-align: center;">
                         <label>Compa-Ratio</label>
                         <div class="big-number" id="c_ratio">0%</div>
                         <div id="c_message" style="font-weight: 600; color: #4a5568;"></div>
-                        
+
                         <div style="background: #e2e8f0; height: 10px; border-radius: 5px; margin-top: 20px; position: relative;">
                             <div id="c_bar" style="height: 100%; width: 0%; background: #667eea; border-radius: 5px; transition: width 0.5s;"></div>
                             <div style="position: absolute; left: 50%; top: -5px; width: 2px; height: 20px; background: #333;" title="Midpoint (100%)"></div>
@@ -308,7 +257,7 @@
             <div class="card">
                 <h2>Structured Interview Generator</h2>
                 <p class="desc">Generate behavioral (STAR) interview questions based on specific competencies and role levels. Includes psychological markers for evaluating candidate responses.</p>
-                
+
                 <div class="grid-2">
                     <div>
                         <div class="form-group">
@@ -331,11 +280,11 @@
                         </div>
                         <button class="action-btn" onclick="genQuestions()">Generate Script</button>
                     </div>
-                    
+
                     <div class="result-box" id="i_result" style="display:none;">
                         <label style="color: #667eea; margin-bottom: 10px; display: block;">Recommended Behavioral Questions</label>
                         <div id="i_questions_list" style="margin-bottom: 20px;"></div>
-                        
+
                         <div style="background: #fff; padding: 15px; border-left: 4px solid #2ecc71; border-radius: 4px;">
                             <strong style="color: #27ae60;"><i class="fas fa-search"></i> Psychological Indicators:</strong>
                             <p id="i_indicators" style="font-size: 0.9rem; color: #555; margin-top: 5px;"></p>
@@ -347,326 +296,16 @@
 
     </div>
 
-    <script>
-        // Tab Logic
-        function openTab(evt, tabName) {
-            var i, panel, btn;
-            panel = document.getElementsByClassName("tool-panel");
-            for (i = 0; i < panel.length; i++) {
-                panel[i].className = panel[i].className.replace(" active", "");
-            }
-            btn = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < btn.length; i++) {
-                btn[i].className = btn[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).className += " active";
-            evt.currentTarget.className += " active";
-        }
+    <footer>
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/byanshuman" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/byanshuman" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:bytheanshuman@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 Anshuman Yadav. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-        // Global Chart Variable
-        let myChart = null;
-
-        // Formatter
-        const money = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
-
-        // 1. Turnover Logic with CHART
-        function calcTurnover() {
-            const salary = parseFloat(document.getElementById('t_salary').value);
-            const hiring = parseFloat(document.getElementById('t_hiring').value);
-            const days = parseFloat(document.getElementById('t_days').value);
-            
-            const dailyRate = salary / 260;
-            const vacancyCost = dailyRate * days * 0.5;
-            const productivityLoss = (salary / 12) * 3 * 0.5; // Assuming 3 month ramp up
-            const total = hiring + vacancyCost + productivityLoss;
-
-            document.getElementById('t_total').innerText = money.format(total);
-            document.getElementById('t_vacancy').innerText = money.format(vacancyCost);
-            document.getElementById('t_prod').innerText = money.format(productivityLoss);
-            document.getElementById('t_result').style.display = 'block';
-
-            // DRAW CHART
-            const ctx = document.getElementById('turnoverChart').getContext('2d');
-            
-            // Destroy previous chart if exists
-            if (myChart) {
-                myChart.destroy();
-            }
-
-            myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Hiring Costs', 'Vacancy Loss', 'Productivity Ramp-up'],
-                    datasets: [{
-                        data: [hiring, vacancyCost, productivityLoss],
-                        backgroundColor: [
-                            '#667eea', // Purple
-                            '#ecc94b', // Yellow
-                            '#ed8936'  // Orange
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Breakdown of Financial Loss'
-                        }
-                    }
-                }
-            });
-        }
-
-        // 2. ROI Logic
-        function calcROI() {
-            const cost = parseFloat(document.getElementById('r_cost').value);
-            const people = parseFloat(document.getElementById('r_people').value);
-            const salary = parseFloat(document.getElementById('r_salary').value);
-            const boost = parseFloat(document.getElementById('r_boost').value) / 100;
-
-            const gain = (salary * people) * boost;
-            const net = gain - cost;
-            const roi = (net / cost) * 100;
-
-            document.getElementById('r_net').innerText = money.format(net);
-            document.getElementById('r_gain').innerText = money.format(gain);
-            document.getElementById('r_percent').innerText = roi.toFixed(1) + "%";
-            
-            const netEl = document.getElementById('r_net');
-            netEl.className = net >= 0 ? "big-number success-text" : "big-number danger-text";
-            
-            document.getElementById('r_result').style.display = 'block';
-        }
-
-        // 3. Funnel Logic
-        function calcFunnel() {
-            const hires = parseFloat(document.getElementById('f_hires').value);
-            const rOffer = parseFloat(document.getElementById('f_ratio_offer').value);
-            const rInterview = parseFloat(document.getElementById('f_ratio_interview').value);
-            const rScreen = parseFloat(document.getElementById('f_ratio_screen').value);
-
-            const offersNeeded = Math.ceil(hires * 1.2);
-            const interviewsNeeded = offersNeeded * rOffer;
-            const screensNeeded = interviewsNeeded * rInterview;
-            const applicantsNeeded = screensNeeded * rScreen;
-
-            document.getElementById('f_applicants').innerText = applicantsNeeded.toLocaleString();
-            document.getElementById('f_screens').innerText = screensNeeded.toLocaleString();
-            document.getElementById('f_interviews').innerText = interviewsNeeded.toLocaleString();
-            document.getElementById('f_offers').innerText = offersNeeded.toLocaleString();
-
-            document.getElementById('f_result').style.display = 'block';
-        }
-
-        // 4. Bradford Logic
-        function calcBradford() {
-            const spells = parseFloat(document.getElementById('b_spells').value);
-            const days = parseFloat(document.getElementById('b_days').value);
-            
-            if(!spells || !days) return;
-
-            const score = (spells * spells) * days;
-            
-            const scoreEl = document.getElementById('b_score');
-            const msgEl = document.getElementById('b_message');
-            
-            scoreEl.innerText = score;
-            
-            if(score <= 50) {
-                scoreEl.style.color = "#38a169"; // Green
-                msgEl.innerText = "No Concern. Within acceptable limits.";
-                msgEl.style.backgroundColor = "#c6f6d5";
-                msgEl.style.color = "#22543d";
-            } else if (score <= 200) {
-                scoreEl.style.color = "#d69e2e"; // Orange
-                msgEl.innerText = "Attention Required. Monitor pattern.";
-                msgEl.style.backgroundColor = "#feebc8";
-                msgEl.style.color = "#744210";
-            } else if (score <= 400) {
-                scoreEl.style.color = "#dd6b20"; // Dark Orange
-                msgEl.innerText = "Action Required. Consider verbal/written warning.";
-                msgEl.style.backgroundColor = "#fbd38d";
-                msgEl.style.color = "#7b341e";
-            } else {
-                scoreEl.style.color = "#e53e3e"; // Red
-                msgEl.innerText = "Severe. Grounds for disciplinary hearing.";
-                msgEl.style.backgroundColor = "#fed7d7";
-                msgEl.style.color = "#822727";
-            }
-            
-            document.getElementById('b_result').style.display = 'block';
-        }
-
-        // 5. Compa-Ratio Logic
-        function calcCompa() {
-            const salary = parseFloat(document.getElementById('c_salary').value);
-            const min = parseFloat(document.getElementById('c_min').value);
-            const max = parseFloat(document.getElementById('c_max').value);
-            
-            if(!salary || !min || !max) return;
-
-            const midpoint = (min + max) / 2;
-            const ratio = (salary / midpoint) * 100;
-            
-            document.getElementById('c_ratio').innerText = ratio.toFixed(1) + "%";
-            
-            const msgEl = document.getElementById('c_message');
-            const bar = document.getElementById('c_bar');
-            
-            const rangeSpan = max - min;
-            const positionInRange = ((salary - min) / rangeSpan) * 100;
-            const visualWidth = Math.max(0, Math.min(100, positionInRange));
-            
-            bar.style.width = visualWidth + "%";
-            
-            if(ratio < 80) {
-                msgEl.innerText = "Below Market (Risk of attrition)";
-                bar.style.background = "#e53e3e";
-            } else if (ratio >= 80 && ratio <= 120) {
-                msgEl.innerText = "Market Competitive";
-                bar.style.background = "#38a169";
-            } else {
-                msgEl.innerText = "Above Market (Premium)";
-                bar.style.background = "#3182ce";
-            }
-
-            document.getElementById('c_result').style.display = 'block';
-        }
-
-        // 6. Interview Generator Logic
-        function genQuestions() {
-            const comp = document.getElementById('i_competency').value;
-            const level = document.getElementById('i_level').value;
-            const list = document.getElementById('i_questions_list');
-            const indic = document.getElementById('i_indicators');
-            
-            // Database of Questions (Expanded V2.0)
-            const db = {
-                'resilience': {
-                    'entry': [
-                        "Tell me about a time you received critical feedback. How did you handle it?", 
-                        "Describe a situation where a project didn't go as planned. What was your immediate reaction?",
-                        "Tell me about a time you had to learn a new skill very quickly to complete a task.",
-                        "Describe a time you were overwhelmed by your workload. How did you prioritize?"
-                    ],
-                    'mid': [
-                        "Describe a time you had to pivot your team's strategy due to a sudden market change.", 
-                        "Tell me about a significant failure in your career. What specific steps did you take to recover?",
-                        "Tell me about a time you had to deliver results with significantly fewer resources than you requested.",
-                        "Describe a time you had to keep your team motivated during a period of uncertainty or layoffs."
-                    ],
-                    'exec': [
-                        "Share an example of a time you led an organization through a crisis. How did you maintain morale?", 
-                        "Describe a situation where you had to make a high-stakes decision with incomplete information.",
-                        "Tell me about a time you faced intense scrutiny from the board or investors. How did you respond?",
-                        "Describe a time you had to rebuild trust with a client or department after a major breach."
-                    ],
-                    'psych': "Look for: Internal Locus of Control (taking responsibility) vs. External Blaming. Candidates should demonstrate 'Growth Mindset'—viewing failure as data rather than a personal deficit."
-                },
-                'conflict': {
-                    'entry': [
-                        "Tell me about a time you disagreed with a peer. How did you resolve it?", 
-                        "Describe a time you had to work with a difficult personality.",
-                        "Tell me about a time you felt a supervisor treated you unfairly. How did you address it?",
-                        "Describe a time there was a miscommunication that caused an error. How did you fix it?"
-                    ],
-                    'mid': [
-                        "Describe a situation where you had to mediate a dispute between two direct reports.", 
-                        "Tell me about a time you had to push back against a senior manager's decision.",
-                        "Describe a time you had to negotiate with a stakeholder who was initially hostile to your idea.",
-                        "Tell me about a time you had to align two departments with competing KPIs."
-                    ],
-                    'exec': [
-                        "Tell me about a time you navigated a political conflict between departments.", 
-                        "Describe how you handle misalignment between the board's vision and operational reality.",
-                        "Tell me about a time you had to dissolve a partnership or fire a key vendor.",
-                        "Describe a time you had to manage a 'culture clash' during a merger or acquisition."
-                    ],
-                    'psych': "Look for: Emotional Regulation and 'I' statements. High-potential candidates focus on the solution, not the drama. Watch for Empathy—can they articulate the other person's perspective?"
-                },
-                'leadership': {
-                    'entry': [
-                        "Tell me about a time you took initiative outside of your job description.", 
-                        "Describe a time you had to persuade others to adopt your idea.",
-                        "Tell me about a time you stepped up to lead when the designated leader was absent.",
-                        "Describe a time you mentored or trained a peer who was struggling."
-                    ],
-                    'mid': [
-                        "Describe a time you had to deliver bad news to your team. How did you frame it?", 
-                        "Tell me about how you developed an underperforming employee into a top performer.",
-                        "Describe a time you had to build a team from scratch. What traits did you look for?",
-                        "Tell me about a time you delegated a task that you really wanted to do yourself."
-                    ],
-                    'exec': [
-                        "Describe your philosophy on organizational culture. How do you operationalize it?", 
-                        "Tell me about a strategic risk you took that paid off. What was your calculation?",
-                        "Describe the most difficult personnel decision (layoffs/restructuring) you have ever made.",
-                        "Tell me about a time you had to sacrifice short-term profits for long-term vision."
-                    ],
-                    'psych': "Look for: Transformational Leadership traits (vision, inspiration) vs. Transactional traits (rewards/punishment). Do they speak about 'We' or 'I'? True leaders share credit."
-                },
-                'innovation': {
-                    'entry': [
-                        "Tell me about a process you improved in your last role.", 
-                        "Describe a creative solution you found to a routine problem.",
-                        "Tell me about a time you challenged the 'status quo' or the way things were always done.",
-                        "Describe a time you identified a mistake in a standard procedure."
-                    ],
-                    'mid': [
-                        "Describe a time you championed a new technology or tool despite resistance.", 
-                        "Tell me about a time you identified a gap in the market or workflow.",
-                        "Describe a time you created an environment where it was safe for your team to fail.",
-                        "Tell me about a product or initiative you launched from concept to execution."
-                    ],
-                    'exec': [
-                        "How do you foster a culture of innovation in a risk-averse environment?", 
-                        "Describe a time you disrupted your own business model to stay competitive.",
-                        "Tell me about a time you greenlit a 'moonshot' project. What was the outcome?",
-                        "Describe how you ensure your organization stays agile as it scales."
-                    ],
-                    'psych': "Look for: Openness to Experience (Big 5 Trait). Candidates should demonstrate curiosity and the ability to connect unrelated concepts (divergent thinking)."
-                },
-                'integrity': {
-                    'entry': [
-                        "Tell me about a time you were asked to do something you felt was unethical.", 
-                        "Describe a time you made a mistake that no one else noticed. What did you do?",
-                        "Tell me about a time you had to admit you didn't know the answer.",
-                        "Describe a time you saw a colleague cutting corners. How did you handle it?"
-                    ],
-                    'mid': [
-                        "Describe a time you had to enforce a policy that made you unpopular.", 
-                        "Tell me about a time you prioritized long-term reputation over short-term gain.",
-                        "Describe a time you discovered a discrepancy in financial or performance data.",
-                        "Tell me about a time you had to give honest feedback to a friend/colleague that risked the friendship."
-                    ],
-                    'exec': [
-                        "Describe a situation where transparency could have hurt the stock price/brand. How did you handle it?", 
-                        "Tell me about a time your values conflicted with business objectives.",
-                        "Describe a time you took public responsibility for a systemic failure in your organization.",
-                        "Tell me about a time you turned down a profitable opportunity because it didn't align with company values."
-                    ],
-                    'psych': "Look for: Consistency and Moral Courage. Watch for hesitation or 'rehearsed' answers. Authentic integrity often involves admitting to vulnerability or difficulty in the decision."
-                }
-            };
-            let html = "<ul style='padding-left: 20px;'>";
-            if(db[comp] && db[comp][level]) {
-                db[comp][level].forEach(q => {
-                    html += `<li style='margin-bottom: 10px; font-weight:500;'>“${q}”</li>`;
-                });
-            }
-            html += "</ul>";
-            
-            list.innerHTML = html;
-            indic.innerText = db[comp]['psych'];
-            
-            document.getElementById('i_result').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
